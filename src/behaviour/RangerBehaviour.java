@@ -9,7 +9,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RangerBehaviour extends CyclicBehaviour {
 
-    ActionController ac = ActionController.getInstance();
     static Thread t;
 
     public RangerBehaviour(Agent a) {
@@ -37,27 +36,28 @@ public class RangerBehaviour extends CyclicBehaviour {
             t.start();
         }
 
-        ACLMessage msg = myAgent.receive();
-        if (msg != null) {
-            String content = msg.getContent();
-            String[] partes = content.split("\\|");
-            String quemAtaca = partes[0];
-            String arma = partes[1];
-            if (quemAtaca.equals("Boss")) {
-                int vidaARetirar = 0;
+        if (JFrame.getRangerlife() <= 0) {
+            JFrame.jLabel_ranger.setVisible(false);
+            JFrame.jProgressBar_rangerLife.setVisible(false);
+            System.out.println("Range: Morri!");
+            t.interrupt();
+            this.getAgent().doSuspend();
+        } else {
 
-                vidaARetirar = ThreadLocalRandom.current().nextInt(0, 30 + 1);
-                if (vidaARetirar == 0) {
-                    System.out.println("Ranger: " + content + " Errouuu");
-                } else {
-                    JFrame.setRangerlife(vidaARetirar);
-                    System.out.println("Ranger: " + content + " -" + vidaARetirar);
-                    if (JFrame.getRangerlife() <= 0) {
-                        JFrame.jLabel_ranger.setVisible(false);
-                        JFrame.jProgressBar_rangerLife.setVisible(false);
-                        System.out.println("Range: Morri!");
-                        t.interrupt();
-                        this.getAgent().doSuspend();
+            ACLMessage msg = myAgent.receive();
+            if (msg != null) {
+                String content = msg.getContent();
+                String[] partes = content.split("\\|");
+                String quemAtaca = partes[0];
+                String arma = partes[1];
+                if (quemAtaca.equals("Boss")) {
+                    int vidaARetirar = 0;
+                    vidaARetirar = ThreadLocalRandom.current().nextInt(0, 30 + 1);
+                    if (vidaARetirar == 0) {
+                        System.out.println("Ranger: " + content + " Errouuu");
+                    } else {
+                        JFrame.setRangerlife(vidaARetirar);
+                        System.out.println("Ranger: " + content + " -" + vidaARetirar);
                     }
                 }
             }
@@ -120,7 +120,6 @@ public class RangerBehaviour extends CyclicBehaviour {
         }
         return true;
     }*/
-    
     void AtacaBoss(String quemAtaca, String arma) {
         ACLMessage MensagemParaEnviar = new ACLMessage(ACLMessage.CONFIRM);
         MensagemParaEnviar.addReceiver(new AID("Boss", AID.ISLOCALNAME));

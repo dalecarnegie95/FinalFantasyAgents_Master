@@ -23,12 +23,14 @@ public class JFrame extends javax.swing.JFrame {
         jTextArea_Warrior.setVisible(false);
         jTextArea_Ranger.setVisible(false);
         jTextArea_Boss.setVisible(false);
+       
         
         initAgentLife();
     }
     
     private void initAgentLife(){
         jProgressBar_bossLife.setValue(1100);
+        jProgressBar_bossLife.setStringPainted(true);
         jProgressBar_rangerLife.setValue(100);
         jProgressBar_mageLife.setValue(100);
         jProgressBar_warriorLife.setValue(100);
@@ -176,37 +178,42 @@ public class JFrame extends javax.swing.JFrame {
         jTextArea_Boss.setBounds(500, 40, 164, 40);
 
         jProgressBar_rangerLife.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBar_rangerLife.setForeground(new java.awt.Color(51, 255, 51));
+        jProgressBar_rangerLife.setForeground(new java.awt.Color(51, 102, 0));
+        jProgressBar_rangerLife.setStringPainted(true);
         getContentPane().add(jProgressBar_rangerLife);
-        jProgressBar_rangerLife.setBounds(130, 10, 146, 14);
+        jProgressBar_rangerLife.setBounds(130, 10, 146, 17);
 
         jLabel_ranger.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mage.png"))); // NOI18N
         getContentPane().add(jLabel_ranger);
         jLabel_ranger.setBounds(140, -10, 110, 230);
 
         jProgressBar_warriorLife.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBar_warriorLife.setForeground(new java.awt.Color(51, 255, 51));
+        jProgressBar_warriorLife.setForeground(new java.awt.Color(0, 102, 0));
+        jProgressBar_warriorLife.setStringPainted(true);
         getContentPane().add(jProgressBar_warriorLife);
-        jProgressBar_warriorLife.setBounds(40, 190, 146, 14);
+        jProgressBar_warriorLife.setBounds(40, 190, 146, 17);
 
         jLabel_warrior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/warrior.png"))); // NOI18N
         getContentPane().add(jLabel_warrior);
         jLabel_warrior.setBounds(30, 210, 180, 210);
 
         jProgressBar_mageLife.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBar_mageLife.setForeground(new java.awt.Color(51, 255, 51));
+        jProgressBar_mageLife.setForeground(new java.awt.Color(51, 102, 0));
+        jProgressBar_mageLife.setStringPainted(true);
         getContentPane().add(jProgressBar_mageLife);
-        jProgressBar_mageLife.setBounds(130, 440, 146, 14);
+        jProgressBar_mageLife.setBounds(130, 440, 146, 17);
 
         jLabel_mage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ranger.png"))); // NOI18N
         getContentPane().add(jLabel_mage);
         jLabel_mage.setBounds(110, 450, 140, 180);
 
         jProgressBar_bossLife.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBar_bossLife.setForeground(new java.awt.Color(51, 255, 51));
+        jProgressBar_bossLife.setForeground(new java.awt.Color(51, 102, 0));
         jProgressBar_bossLife.setMaximum(1100);
+        jProgressBar_bossLife.setOpaque(true);
+        jProgressBar_bossLife.setStringPainted(true);
         getContentPane().add(jProgressBar_bossLife);
-        jProgressBar_bossLife.setBounds(620, 10, 380, 14);
+        jProgressBar_bossLife.setBounds(620, 10, 380, 17);
 
         jLabel_boss.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/boss.png"))); // NOI18N
         getContentPane().add(jLabel_boss);

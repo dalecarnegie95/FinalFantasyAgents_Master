@@ -10,7 +10,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MageBehaviour extends CyclicBehaviour {
 
-    ActionController ac = ActionController.getInstance();
     static Thread t;
 
     public MageBehaviour(Agent a) {
@@ -35,26 +34,27 @@ public class MageBehaviour extends CyclicBehaviour {
             t.start();
         }
 
-        ACLMessage msg = myAgent.receive();
-        if (msg != null) {
-            String content = msg.getContent();
-            String[] partes = content.split("\\|");
-            String quemAtaca = partes[0];
-            String arma = partes[1];
-            if (quemAtaca.equals("Boss")) {
-                int vidaARetirar = 0;
-                vidaARetirar = ThreadLocalRandom.current().nextInt(0, 30 + 1);
-                if (vidaARetirar == 0) {
-                    System.out.println("Mage: " + content + " Errouuu");
-                } else {
-                    JFrame.setMagelife(vidaARetirar);
-                    System.out.println("Mage: " + content + " -" + vidaARetirar);
-                    if (JFrame.getMagelife() <= 0) {
-                        JFrame.jLabel_mage.setVisible(false);
-                        JFrame.jProgressBar_mageLife.setVisible(false);
-                        System.out.println("Mage: Morri!");
-                        t.interrupt();
-                        this.getAgent().doSuspend();
+        if (JFrame.getMagelife() <= 0) {
+            JFrame.jLabel_mage.setVisible(false);
+            JFrame.jProgressBar_mageLife.setVisible(false);
+            System.out.println("Mage: Morri!");
+            t.interrupt();
+            this.getAgent().doSuspend();
+        } else {
+            ACLMessage msg = myAgent.receive();
+            if (msg != null) {
+                String content = msg.getContent();
+                String[] partes = content.split("\\|");
+                String quemAtaca = partes[0];
+                String arma = partes[1];
+                if (quemAtaca.equals("Boss")) {
+                    int vidaARetirar = 0;
+                    vidaARetirar = ThreadLocalRandom.current().nextInt(0, 30 + 1);
+                    if (vidaARetirar == 0) {
+                        System.out.println("Mage: " + content + " Errouuu");
+                    } else {
+                        JFrame.setMagelife(vidaARetirar);
+                        System.out.println("Mage: " + content + " -" + vidaARetirar);
                     }
                 }
             }

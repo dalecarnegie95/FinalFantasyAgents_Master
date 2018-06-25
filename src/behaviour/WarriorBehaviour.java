@@ -9,7 +9,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class WarriorBehaviour extends CyclicBehaviour {
 
-    ActionController ac = ActionController.getInstance();
     static Thread t;
 
     public WarriorBehaviour(Agent a) {
@@ -18,7 +17,6 @@ public class WarriorBehaviour extends CyclicBehaviour {
 
     @Override
     public void action() {
-
         if (t == null || !t.isAlive()) {
             t = new Thread() {
                 public void run() {
@@ -34,32 +32,31 @@ public class WarriorBehaviour extends CyclicBehaviour {
             t.start();
         }
 
-        ACLMessage msg = myAgent.receive();
-        if (msg != null) {
-            String content = msg.getContent();
-            String[] partes = content.split("\\|");
-            String quemAtaca = partes[0];
-            String arma = partes[1];
-            if (quemAtaca.equals("Boss")) {
-                int vidaARetirar = 0;
-
-                vidaARetirar = ThreadLocalRandom.current().nextInt(0, 30 + 1);
-                if (vidaARetirar == 0) {
-                    System.out.println("Warrior: " + content + " Errouuu");
-                } else {
-                    JFrame.setWarriorlife(vidaARetirar);
-                    System.out.println("Warrior: " + content + " -" + vidaARetirar);
-                    if (JFrame.getWarriorlife() <= 0) {
-                        JFrame.jLabel_warrior.setVisible(false);
-                        JFrame.jProgressBar_warriorLife.setVisible(false);
-                        System.out.println("Warrior: Morri!");
-                        t.interrupt();
-                        this.getAgent().doSuspend();
+        if (JFrame.getWarriorlife() <= 0) {
+            JFrame.jLabel_warrior.setVisible(false);
+            JFrame.jProgressBar_warriorLife.setVisible(false);
+            System.out.println("Warrior: Morri!");
+            t.interrupt();
+            this.getAgent().doSuspend();
+        } else {
+            ACLMessage msg = myAgent.receive();
+            if (msg != null) {
+                String content = msg.getContent();
+                String[] partes = content.split("\\|");
+                String quemAtaca = partes[0];
+                String arma = partes[1];
+                if (quemAtaca.equals("Boss")) {
+                    int vidaARetirar = 0;
+                    vidaARetirar = ThreadLocalRandom.current().nextInt(0, 30 + 1);
+                    if (vidaARetirar == 0) {
+                        System.out.println("Warrior: " + content + " Errouuu");
+                    } else {
+                        JFrame.setWarriorlife(vidaARetirar);
+                        System.out.println("Warrior: " + content + " -" + vidaARetirar);
                     }
                 }
             }
         }
-
     }
 
     private void sleep() {
@@ -88,7 +85,7 @@ public class WarriorBehaviour extends CyclicBehaviour {
         myAgent.send(MensagemParaEnviar);
         //JFrame.setWarriorLog(MensagemParaEnviar.getContent());
         JFrame.setWarriorAnimation();
-        
+
     }
 
 }

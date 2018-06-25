@@ -9,7 +9,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class BossBehaviour extends CyclicBehaviour {
 
-    ActionController ac = ActionController.getInstance();
     static Thread t;
 
     public BossBehaviour(Agent a) {
@@ -43,50 +42,51 @@ public class BossBehaviour extends CyclicBehaviour {
             t.start();
         }
 
-        ACLMessage msg = myAgent.receive();
-        if (msg != null) {
-            String content = msg.getContent();
-            String[] partes = content.split("\\|");
-            String quemAtaca = partes[0];
-            String arma = partes[1];
-            if (arma.equals("flexa")) {
-                int vidaARetirar = 0;
+        if (JFrame.getBosslife() <= 0) {
+            JFrame.jLabel_boss.setVisible(false);
+            JFrame.jProgressBar_bossLife.setVisible(false);
+            System.out.println("Boss: Morri!");
+            t.interrupt();
+            this.getAgent().doSuspend();
+        } else {
+            ACLMessage msg = myAgent.receive();
+            if (msg != null) {
+                String content = msg.getContent();
+                String[] partes = content.split("\\|");
+                String quemAtaca = partes[0];
+                String arma = partes[1];
+                if (arma.equals("flexa")) {
+                    int vidaARetirar = 0;
+                    vidaARetirar = ThreadLocalRandom.current().nextInt(0, 2 + 1);
+                    if (vidaARetirar == 0) {
+                        System.out.println("Boss: " + content + " Errouuu");
+                    } else {
+                        JFrame.setBosslife(vidaARetirar);
+                        System.out.println("Boss: " + content + " -" + vidaARetirar);
+                    }
+                } else if (arma.equals("magia")) {
+                    int vidaARetirar = 0;
 
-                vidaARetirar = ThreadLocalRandom.current().nextInt(0, 2 + 1);
-                if (vidaARetirar == 0) {
-                    System.out.println("Boss: " + content + " Errouuu");
-                } else {
-                    JFrame.setBosslife(vidaARetirar);
-                    System.out.println("Boss: " + content + " -" + vidaARetirar);
+                    vidaARetirar = ThreadLocalRandom.current().nextInt(0, 50 + 1);
+                    if (vidaARetirar == 0) {
+                        System.out.println("Boss: " + content + " Errouuu");
+
+                    } else {
+                        JFrame.setBosslife(vidaARetirar);
+                        System.out.println("Boss: " + content + " -" + vidaARetirar);
+                    }
+                } else if (arma.equals("espada")) {
+                    int vidaARetirar = 0;
+
+                    vidaARetirar = ThreadLocalRandom.current().nextInt(3, 45 + 1);
+                    if (vidaARetirar == 0) {
+                        System.out.println("Boss: " + content + " Errouuu");
+
+                    } else {
+                        JFrame.setBosslife(vidaARetirar);
+                        System.out.println("Boss: " + content + " -" + vidaARetirar);
+                    }
                 }
-            } else if (arma.equals("magia")) {
-                int vidaARetirar = 0;
-
-                vidaARetirar = ThreadLocalRandom.current().nextInt(0, 50 + 1);
-                if (vidaARetirar == 0) {
-                    System.out.println("Boss: " + content + " Errouuu");
-
-                } else {
-                    JFrame.setBosslife(vidaARetirar);
-                    System.out.println("Boss: " + content + " -" + vidaARetirar);
-                }
-            } else if (arma.equals("espada")) {
-                int vidaARetirar = 0;
-
-                vidaARetirar = ThreadLocalRandom.current().nextInt(3, 45 + 1);
-                if (vidaARetirar == 0) {
-                    System.out.println("Boss: " + content + " Errouuu");
-
-                } else {
-                    JFrame.setBosslife(vidaARetirar);
-                    System.out.println("Boss: " + content + " -" + vidaARetirar);
-                }
-            }
-
-            if (JFrame.getBosslife() <= 0) {
-                System.out.println("Boss: Morri!");
-                t.interrupt();
-                this.getAgent().doSuspend();
             }
         }
 
