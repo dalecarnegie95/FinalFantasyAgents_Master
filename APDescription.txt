@@ -1,1 +1,1 @@
-( ap-description  :name "FinalFantasy" :ap-services (set ( ap-service  :name fipa.mts.mtp.http.std :type fipa.mts.mtp.http.std :addresses (sequence http://LAPTOP-0V29QHOC:7778/acc))))
+( ap-description  :name "FinalFantasy" :ap-services (set ( ap-service  :name fipa.mts.mtp.http.std :type fipa.mts.mtp.http.std :addresses (sequence http://informatica05.semasaitajai.com.br:7778/acc))))

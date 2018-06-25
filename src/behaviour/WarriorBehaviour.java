@@ -84,59 +84,9 @@ public class WarriorBehaviour extends CyclicBehaviour {
         //MensagemParaEnviar.setOntology(mensagem.getOntology());
         MensagemParaEnviar.setContent(quemAtaca + "|" + arma);
         myAgent.send(MensagemParaEnviar);
+        //JFrame.setWarriorLog(MensagemParaEnviar.getContent());
+        JFrame.setWarriorAnimation();
+        
     }
 
 }
-
-/*
-    @Override
-    public void action() {
-        for (Agent agent : Controller.AGENT_LIST) {
-            // ac.setActionTurn(getAgent().getAID().getLocalName());
-            if (agent.getAID().getLocalName().toLowerCase().equals("boss")) {              
-
-                    if (agent.getState() != 4) {
-
-                        int vidaARetirar = 0;
-
-                        vidaARetirar = ThreadLocalRandom.current().nextInt(3, 45 + 1);
-                        if (vidaARetirar == 0) {
-                            System.out.println("Warrior:Errouuuu");
-                            continue;
-                        }
-                        System.out.println("Warrior:tentando tirar " + vidaARetirar + " de vida do boss");
-                        if (((Boss) agent).life > 0) {
-
-                            //System.out.println("toma seu " + agent.getAID().getLocalName() + " viado");
-                            if (((Boss) agent).life > vidaARetirar) {
-                                ((Boss) agent).life -= vidaARetirar;
-                            } else {
-                                ((Boss) agent).life -= 0;
-                                ((Boss) agent).doSuspend();
-                                break;
-                            }
-                        }
-                        /*
-                if(agent.getState() == 4){                    
-                    agent.doActivate();
-                    ((Mage) agent).life = 50;
-                }
-                    }                
-
-            }
-        }
-        ((Warrior) this.getAgent()).esperaMili = ThreadLocalRandom.current().nextInt(700, 6000 + 1);
-           // System.out.println("Warrior:esperando " + ((Warrior) this.getAgent()).esperaMili + " milisegundos para carregar");
-            sleep(((Warrior) this.getAgent()).esperaMili);            
-
-
-    }
-    *
-
-    void sleep(int milisegundos) {
-        try {
-            Thread.sleep(milisegundos);
-        } catch (Exception ex) {
-
-        }
-    }*/

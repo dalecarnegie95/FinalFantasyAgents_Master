@@ -85,5 +85,7 @@ public class MageBehaviour extends CyclicBehaviour {
         //MensagemParaEnviar.setOntology(mensagem.getOntology());
         MensagemParaEnviar.setContent(quemAtaca + "|" + arma);
         myAgent.send(MensagemParaEnviar);
+        //JFrame.setMageLog(MensagemParaEnviar.getContent());
+        JFrame.setMageAnimation();
     }
 }

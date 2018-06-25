@@ -99,6 +99,8 @@ public class BossBehaviour extends CyclicBehaviour {
         //MensagemParaEnviar.setOntology(mensagem.getOntology());
         MensagemParaEnviar.setContent("Boss|" + "espada");
         myAgent.send(MensagemParaEnviar);
+        //JFrame.setBossLog(MensagemParaEnviar.getContent());
+        JFrame.setBossAnimation();
     }
 
     private boolean sleepInicial() {

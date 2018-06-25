@@ -18,9 +18,9 @@ public class RangerBehaviour extends CyclicBehaviour {
 
     @Override
     public void action() {
-
         if (t == null || !t.isAlive()) {
             t = new Thread() {
+                @Override
                 public void run() {
                     try {
                         if (sleepInicial()) {
@@ -30,7 +30,7 @@ public class RangerBehaviour extends CyclicBehaviour {
                             }
                         }
                     } catch (Exception v) {
-                        System.out.println("fgdfgdf" + v);
+                        System.out.println(v);
                     }
                 }
             };
@@ -118,6 +118,7 @@ public class RangerBehaviour extends CyclicBehaviour {
         }
         return true;
     }*/
+    
     void AtacaBoss(String quemAtaca, String arma) {
         ACLMessage MensagemParaEnviar = new ACLMessage(ACLMessage.CONFIRM);
         MensagemParaEnviar.addReceiver(new AID("Boss", AID.ISLOCALNAME));
@@ -125,6 +126,8 @@ public class RangerBehaviour extends CyclicBehaviour {
         //MensagemParaEnviar.setOntology(mensagem.getOntology());
         MensagemParaEnviar.setContent(quemAtaca + "|" + arma);
         myAgent.send(MensagemParaEnviar);
+        //JFrame.setRangerLog(MensagemParaEnviar.getContent());
+        JFrame.setRangerAnimation();
     }
 
 }
