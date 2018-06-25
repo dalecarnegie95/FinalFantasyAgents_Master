@@ -53,6 +53,8 @@ public class RangerBehaviour extends CyclicBehaviour {
                     JFrame.setRangerlife(vidaARetirar);
                     System.out.println("Ranger: " + content + " -" + vidaARetirar);
                     if (JFrame.getRangerlife() <= 0) {
+                        JFrame.jLabel_ranger.setVisible(false);
+                        JFrame.jProgressBar_rangerLife.setVisible(false);
                         System.out.println("Range: Morri!");
                         t.interrupt();
                         this.getAgent().doSuspend();

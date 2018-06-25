@@ -43,7 +43,6 @@ public class MageBehaviour extends CyclicBehaviour {
             String arma = partes[1];
             if (quemAtaca.equals("Boss")) {
                 int vidaARetirar = 0;
-
                 vidaARetirar = ThreadLocalRandom.current().nextInt(0, 30 + 1);
                 if (vidaARetirar == 0) {
                     System.out.println("Mage: " + content + " Errouuu");
@@ -51,6 +50,8 @@ public class MageBehaviour extends CyclicBehaviour {
                     JFrame.setMagelife(vidaARetirar);
                     System.out.println("Mage: " + content + " -" + vidaARetirar);
                     if (JFrame.getMagelife() <= 0) {
+                        JFrame.jLabel_mage.setVisible(false);
+                        JFrame.jProgressBar_mageLife.setVisible(false);
                         System.out.println("Mage: Morri!");
                         t.interrupt();
                         this.getAgent().doSuspend();

@@ -50,6 +50,8 @@ public class WarriorBehaviour extends CyclicBehaviour {
                     JFrame.setWarriorlife(vidaARetirar);
                     System.out.println("Warrior: " + content + " -" + vidaARetirar);
                     if (JFrame.getWarriorlife() <= 0) {
+                        JFrame.jLabel_warrior.setVisible(false);
+                        JFrame.jProgressBar_warriorLife.setVisible(false);
                         System.out.println("Warrior: Morri!");
                         t.interrupt();
                         this.getAgent().doSuspend();

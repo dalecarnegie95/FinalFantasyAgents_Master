@@ -29,8 +29,8 @@ public class JFrame extends javax.swing.JFrame {
     
     private void initAgentLife(){
         jProgressBar_bossLife.setValue(1100);
-        jProgressBar_mageLife.setValue(100);
         jProgressBar_rangerLife.setValue(100);
+        jProgressBar_mageLife.setValue(100);
         jProgressBar_warriorLife.setValue(100);
     }
     
@@ -39,11 +39,11 @@ public class JFrame extends javax.swing.JFrame {
     }
     
     public static void setMagelife(int life){
-        jProgressBar_mageLife.setValue(jProgressBar_mageLife.getValue() - life);
+        jProgressBar_rangerLife.setValue(jProgressBar_rangerLife.getValue() - life);
     }
     
     public static void setRangerlife(int life){
-        jProgressBar_rangerLife.setValue(jProgressBar_rangerLife.getValue() - life);
+        jProgressBar_mageLife.setValue(jProgressBar_mageLife.getValue() - life);
     }
     
     public static void setWarriorlife(int life){
@@ -142,11 +142,11 @@ public class JFrame extends javax.swing.JFrame {
         jTextArea_Ranger = new javax.swing.JTextArea();
         jTextArea_Warrior = new javax.swing.JTextArea();
         jTextArea_Boss = new javax.swing.JTextArea();
-        jProgressBar_mageLife = new javax.swing.JProgressBar();
+        jProgressBar_rangerLife = new javax.swing.JProgressBar();
         jLabel_ranger = new javax.swing.JLabel();
         jProgressBar_warriorLife = new javax.swing.JProgressBar();
         jLabel_warrior = new javax.swing.JLabel();
-        jProgressBar_rangerLife = new javax.swing.JProgressBar();
+        jProgressBar_mageLife = new javax.swing.JProgressBar();
         jLabel_mage = new javax.swing.JLabel();
         jProgressBar_bossLife = new javax.swing.JProgressBar();
         jLabel_boss = new javax.swing.JLabel();
@@ -175,10 +175,10 @@ public class JFrame extends javax.swing.JFrame {
         getContentPane().add(jTextArea_Boss);
         jTextArea_Boss.setBounds(500, 40, 164, 40);
 
-        jProgressBar_mageLife.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBar_mageLife.setForeground(new java.awt.Color(51, 255, 51));
-        getContentPane().add(jProgressBar_mageLife);
-        jProgressBar_mageLife.setBounds(130, 10, 146, 14);
+        jProgressBar_rangerLife.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBar_rangerLife.setForeground(new java.awt.Color(51, 255, 51));
+        getContentPane().add(jProgressBar_rangerLife);
+        jProgressBar_rangerLife.setBounds(130, 10, 146, 14);
 
         jLabel_ranger.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mage.png"))); // NOI18N
         getContentPane().add(jLabel_ranger);
@@ -193,10 +193,10 @@ public class JFrame extends javax.swing.JFrame {
         getContentPane().add(jLabel_warrior);
         jLabel_warrior.setBounds(30, 210, 180, 210);
 
-        jProgressBar_rangerLife.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBar_rangerLife.setForeground(new java.awt.Color(51, 255, 51));
-        getContentPane().add(jProgressBar_rangerLife);
-        jProgressBar_rangerLife.setBounds(130, 440, 146, 14);
+        jProgressBar_mageLife.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBar_mageLife.setForeground(new java.awt.Color(51, 255, 51));
+        getContentPane().add(jProgressBar_mageLife);
+        jProgressBar_mageLife.setBounds(130, 440, 146, 14);
 
         jLabel_mage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ranger.png"))); // NOI18N
         getContentPane().add(jLabel_mage);
