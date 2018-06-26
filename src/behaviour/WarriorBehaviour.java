@@ -6,6 +6,7 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.ImageIcon;
 
 public class WarriorBehaviour extends CyclicBehaviour {
 
@@ -19,6 +20,7 @@ public class WarriorBehaviour extends CyclicBehaviour {
     public void action() {
         if (t == null || !t.isAlive()) {
             t = new Thread() {
+                @Override
                 public void run() {
                     try {
                         if (sleepInicial()) {
@@ -52,6 +54,7 @@ public class WarriorBehaviour extends CyclicBehaviour {
                         System.out.println("Warrior: " + content + " Errouuu");
                     } else {
                         JFrame.setWarriorlife(vidaARetirar);
+                        //JFrame.updateWarriorDamageAnimation(vidaARetirar);
                         System.out.println("Warrior: " + content + " -" + vidaARetirar);
                     }
                 }
@@ -84,8 +87,16 @@ public class WarriorBehaviour extends CyclicBehaviour {
         MensagemParaEnviar.setContent(quemAtaca + "|" + arma);
         myAgent.send(MensagemParaEnviar);
         //JFrame.setWarriorLog(MensagemParaEnviar.getContent());
-        JFrame.setWarriorAnimation();
-
+        callAttackAnimation();
+    }
+    
+    private void callAttackAnimation(){
+        for (int i = 0; i < 10; i++) {
+            ImageIcon ii = new ImageIcon(getClass().getResource("/images/warrior_attack_" + i + ".png")); 
+            JFrame.updateWarriorAnimation(ii, i);
+        }
+        ImageIcon ii = new ImageIcon(getClass().getResource("/images/warrior_idle_1.png")); 
+        JFrame.updateWarriorAnimation(ii, 1);
     }
 
 }

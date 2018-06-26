@@ -7,6 +7,7 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.ImageIcon;
 
 public class MageBehaviour extends CyclicBehaviour {
 
@@ -18,9 +19,9 @@ public class MageBehaviour extends CyclicBehaviour {
 
     @Override
     public void action() {
-
         if (t == null || !t.isAlive()) {
             t = new Thread() {
+                @Override
                 public void run() {
                     try {
                         if (sleepInicial()) {
@@ -54,6 +55,7 @@ public class MageBehaviour extends CyclicBehaviour {
                         System.out.println("Mage: " + content + " Errouuu");
                     } else {
                         JFrame.setMagelife(vidaARetirar);
+                        //JFrame.updateMageDamageAnimation(vidaARetirar);
                         System.out.println("Mage: " + content + " -" + vidaARetirar);
                     }
                 }
@@ -87,6 +89,16 @@ public class MageBehaviour extends CyclicBehaviour {
         MensagemParaEnviar.setContent(quemAtaca + "|" + arma);
         myAgent.send(MensagemParaEnviar);
         //JFrame.setMageLog(MensagemParaEnviar.getContent());
-        JFrame.setMageAnimation();
+        callAttackAnimation();
     }
+    
+    private void callAttackAnimation(){
+        for (int i = 0; i < 8; i++) {
+            ImageIcon ii = new ImageIcon(getClass().getResource("/images/mage_attack_" + i + ".png")); 
+            JFrame.updateMageAnimation(ii, i);
+        }
+        ImageIcon ii = new ImageIcon(getClass().getResource("/images/ranger.png")); 
+        JFrame.updateMageAnimation(ii, 1);
+    }
+    
 }

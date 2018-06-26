@@ -6,6 +6,7 @@ import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.ImageIcon;
 
 public class RangerBehaviour extends CyclicBehaviour {
 
@@ -35,7 +36,7 @@ public class RangerBehaviour extends CyclicBehaviour {
             };
             t.start();
         }
-
+        
         if (JFrame.getRangerlife() <= 0) {
             JFrame.jLabel_ranger.setVisible(false);
             JFrame.jProgressBar_rangerLife.setVisible(false);
@@ -43,7 +44,6 @@ public class RangerBehaviour extends CyclicBehaviour {
             t.interrupt();
             this.getAgent().doSuspend();
         } else {
-
             ACLMessage msg = myAgent.receive();
             if (msg != null) {
                 String content = msg.getContent();
@@ -57,6 +57,7 @@ public class RangerBehaviour extends CyclicBehaviour {
                         System.out.println("Ranger: " + content + " Errouuu");
                     } else {
                         JFrame.setRangerlife(vidaARetirar);
+                        //JFrame.updateRangerDamageAnimation(vidaARetirar);
                         System.out.println("Ranger: " + content + " -" + vidaARetirar);
                     }
                 }
@@ -128,7 +129,17 @@ public class RangerBehaviour extends CyclicBehaviour {
         MensagemParaEnviar.setContent(quemAtaca + "|" + arma);
         myAgent.send(MensagemParaEnviar);
         //JFrame.setRangerLog(MensagemParaEnviar.getContent());
-        JFrame.setRangerAnimation();
+        callAttackAnimation();
+    }
+    
+    private void callAttackAnimation(){
+        for (int i = 0; i < 10; i++) {
+            ImageIcon ii = new ImageIcon(getClass().getResource("/images/ranger_attack_" + i + ".png")); 
+            JFrame.updateRangerAnimation(ii, i);
+        }
+        ImageIcon ii = new ImageIcon(getClass().getResource("/images/ranger_idle_1.png")); 
+        JFrame.updateRangerAnimation(ii, 1);
+        JFrame.updateKunaiAnimation();
     }
 
 }

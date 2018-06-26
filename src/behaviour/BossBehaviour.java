@@ -17,14 +17,12 @@ public class BossBehaviour extends CyclicBehaviour {
 
     @Override
     public void action() {
-
         if (t == null || !t.isAlive()) {
             t = new Thread() {
                 public void run() {
                     try {
                         if (sleepInicial()) {
                             int heroiParaAtacar = 0;
-
                             heroiParaAtacar = ThreadLocalRandom.current().nextInt(1, 3 + 1);
                             if (heroiParaAtacar == 1) {
                                 AtacaHeroi("Mage");
@@ -41,7 +39,6 @@ public class BossBehaviour extends CyclicBehaviour {
             };
             t.start();
         }
-
         if (JFrame.getBosslife() <= 0) {
             JFrame.jLabel_boss.setVisible(false);
             JFrame.jProgressBar_bossLife.setVisible(false);
@@ -62,6 +59,7 @@ public class BossBehaviour extends CyclicBehaviour {
                         System.out.println("Boss: " + content + " Errouuu");
                     } else {
                         JFrame.setBosslife(vidaARetirar);
+                        //JFrame.updateBossDamageAnimation(vidaARetirar);
                         System.out.println("Boss: " + content + " -" + vidaARetirar);
                     }
                 } else if (arma.equals("magia")) {
@@ -73,6 +71,7 @@ public class BossBehaviour extends CyclicBehaviour {
 
                     } else {
                         JFrame.setBosslife(vidaARetirar);
+                        //JFrame.updateBossDamageAnimation(vidaARetirar);
                         System.out.println("Boss: " + content + " -" + vidaARetirar);
                     }
                 } else if (arma.equals("espada")) {
@@ -84,6 +83,7 @@ public class BossBehaviour extends CyclicBehaviour {
 
                     } else {
                         JFrame.setBosslife(vidaARetirar);
+                        //JFrame.updateBossDamageAnimation(vidaARetirar);
                         System.out.println("Boss: " + content + " -" + vidaARetirar);
                     }
                 }
